@@ -9,3 +9,4 @@ def main():
     medellin_full.to_csv("medellin_full.csv")
 #pj
 main()
+print(3)
