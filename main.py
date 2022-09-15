@@ -8,5 +8,5 @@ def main():
     medellin_full = medellin.fillna({"harassmentRisk":medellin.harassmentRisk.mean()}).fillna({"name":"---"})
     print(f"{file_name} was now saved on medellin_full.csv without empty values")
     medellin_full.to_csv("medellin_full.csv")
-#pj
+    
 main()
