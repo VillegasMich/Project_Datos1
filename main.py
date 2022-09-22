@@ -1,12 +1,35 @@
 import pandas as pd
-# import map_visual
+import pprint
+
+medellin_full = pd.read_csv("medellin_full.csv")
 
 def main():
-    file_name = "calles_de_medellin_con_acoso.csv"
-    medellin = pd.read_csv(file_name, sep=';')
-
-    medellin_full = medellin.fillna({"harassmentRisk":medellin.harassmentRisk.mean()}).fillna({"name":"---"})
-    print(f"{file_name} was now saved on medellin_full.csv without empty values")
-    medellin_full.to_csv("medellin_full.csv")
     
+    unique_origins = medellin_full.origin.unique()
+    graph = {}
+
+    """
+    The graph (dictionary) is initialized with all unique sources pointing to an empty dictionary.
+    """
+    for og in unique_origins:
+        graph[og] = {}
+
+    """
+    We traverse all medelllin_full with .iterrows()
+    Initialize the corresponding variables using row['column'] to access the data
+    We create the dictionary (new_destination) where the key=destination and the value=(length, harassment)
+    we use the .update to add this new_destination to the network
+    """
+    for _, row in medellin_full.iterrows():
+        current_origin = graph[row["origin"]]
+        destination = row['destination']
+        length = row['length']
+        harassment = row['harassmentRisk']
+        #oneway = row['oneway']
+
+        new_destination = { destination: (length, harassment) }
+        current_origin.update(new_destination)
+
+    pprint.pprint(graph)
+
 main()
