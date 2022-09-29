@@ -21,15 +21,24 @@ def main():
     we use the .update to add this new_destination to the network
     """
     for _, row in medellin_full.iterrows():
-        current_origin = graph[row["origin"]]
+        origin = row["origin"]
         destination = row['destination']
         length = row['length']
         harassment = row['harassmentRisk']
-        #oneway = row['oneway']
+        oneway = row['oneway']
+        
+        if oneway == True:
+            new_destination = { destination: (length, harassment) }
+            graph[origin].update(new_destination)
+            try:
+                other_side = { origin: (length, harassment) }
+                graph[destination].update(other_side)
+            except KeyError:
+                graph[destination] = other_side
 
         new_destination = { destination: (length, harassment) }
-        current_origin.update(new_destination)
+        graph[origin].update(new_destination)
 
-    pprint.pprint(graph)
+    pprint.pprint(graph["(-75.5705202, 6.2106275)"]) # Example
 
 main()
