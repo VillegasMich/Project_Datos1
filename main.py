@@ -1,5 +1,6 @@
 import pandas as pd
 from dijkstra import shortest_path, generate_path
+from map_visual import mark_route
 
 medellin_full = pd.read_csv("medellin_full.csv", sep=';')
 
@@ -38,13 +39,16 @@ def main():
 
         new_destination = { destination: (length, harassment) }
         graph[origin].update(new_destination)
-        
+    
+    
     # Random example 
     
-    # source = "(-75.5705202, 6.2106275)"
-    # destination = "(-75.568715, 6.2099443)"
+    source = "(-75.5705202, 6.2106275)"
+    destination = "(-75.5611967, 6.2048326)"
     
-    # prev = shortest_path(graph, source, destination)
-    # print(generate_path(prev, destination))
+    prev = shortest_path(graph, source, destination)
+    path = generate_path(prev, destination)
+    
+    mark_route(path, 'red')
 
 main()
