@@ -1,7 +1,7 @@
 import pandas as pd
-import pprint
+from dijkstra import shortest_path, generate_path
 
-medellin_full = pd.read_csv("medellin_full.csv")
+medellin_full = pd.read_csv("medellin_full.csv", sep=';')
 
 def main():
     
@@ -38,7 +38,13 @@ def main():
 
         new_destination = { destination: (length, harassment) }
         graph[origin].update(new_destination)
-
-    pprint.pprint(graph["(-75.5705202, 6.2106275)"]) # Example
+        
+    # Random example 
+    
+    # source = "(-75.5705202, 6.2106275)"
+    # destination = "(-75.568715, 6.2099443)"
+    
+    # prev = shortest_path(graph, source, destination)
+    # print(generate_path(prev, destination))
 
 main()
