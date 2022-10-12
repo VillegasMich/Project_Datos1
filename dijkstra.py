@@ -1,14 +1,12 @@
 from queue import PriorityQueue
-from collections import deque
 
 """
 Dijkstra algorithm with a priority queue from the PriorityQueue module
 Prev is a dictionary to keep track of the previous vertex to generate the path
-Find the shortest path from a source to a certain destination (length * harassment)
+It takes a weight_func (lambda) to determine how to calculate the distances for the algorithm
 """
 
-def shortest_path(graph, source, destination):
-
+def shortest_path(graph, source, destination, weight_func):
     dist = {}
     prev = {}
     pq = PriorityQueue()
@@ -27,7 +25,7 @@ def shortest_path(graph, source, destination):
         _, node = pq.get()
         
         for neighbor, weight in graph[node].items():
-            distance = dist[node] + (weight[0] * weight[1])
+            distance = dist[node] + weight_func(weight[0], weight[1])
             if distance < dist[neighbor]:
                 dist[neighbor] = distance
                 prev[neighbor] = node
@@ -37,9 +35,9 @@ def shortest_path(graph, source, destination):
 
 """
 Using backtracking to select only the necessary vertices from the destination to the source
+It returns the path of the algorithm 
 """
-
-def generate_path(prev, curr, path = deque()):
+def generate_path(prev, curr, path):
     if prev[curr] == None:
         path.appendleft(curr)
         return path
