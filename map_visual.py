@@ -7,8 +7,8 @@ The function to generate the .html file and open it using the absolute path and 
 """
 def open_gmap(gmap):
     gmap.draw("map.html")
-    map_path = os.path.abspath("map.html")
-    webbrowser.open(map_path ,new=1)
+    # map_path = os.path.abspath("map.html")
+    webbrowser.open('map.html', new=1)
 
 # TODO: Highlight the limit of the map (medellin_full.csv)
 
@@ -31,7 +31,8 @@ def mark_route(path, color, gmap):
 
 
 # TODO: geocode, make the software interactive
-# entrada = input()
+# apikey = 'AIzaSyCJfnE-UzN0Hc89l89kxl6D8MkVopUYtO4'
+# entrada = input("Ingresa el lugar: ")
 # location = gm.GoogleMapPlotter.geocode(f"{entrada}, medellin colombia", apikey=apikey)
 # print(location)
 

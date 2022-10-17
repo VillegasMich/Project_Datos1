@@ -5,6 +5,11 @@ import pandas as pd
 from dijkstra import shortest_path, generate_path
 from map_visual import mark_route, open_gmap
 
+"""
+El codigo para la segunda entrega está mas avanzado de lo requerido (practicamente completo)
+Abajo se encuentra un ejemplo random para probar el correcto funcionamiento del código
+"""
+
 medellin_full = pd.read_csv("medellin_full.csv", sep=';')
 
 def main():
@@ -12,7 +17,7 @@ def main():
     """
     Apikey for the gmplot
     """
-    apikey = 'AIzaSyCJfnE-UzN0Hc89l89kxl6D8MkVopUYtO4' # (API key here)
+    apikey = 'AIzaSyCJfnE-UzN0Hc89l89kxl6D8MkVopUYtO4'
     
     unique_origins = medellin_full.origin.unique()
     graph = {}
@@ -47,7 +52,6 @@ def main():
 
         new_destination = { destination: (length, harassment) }
         graph[origin].update(new_destination)
-    
     
     #! Random example to test the algorithms
     
