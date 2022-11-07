@@ -7,6 +7,7 @@ It takes a weight_func (lambda) to determine how to calculate the distances for 
 """
 
 def shortest_path(graph, source, destination, weight_func):
+    
     dist = {}
     prev = {}
     pq = PriorityQueue()
@@ -23,6 +24,9 @@ def shortest_path(graph, source, destination, weight_func):
     
     while not pq.empty():
         _, node = pq.get()
+        
+        if node == destination:
+            break
         
         for neighbor, weight in graph[node].items():
             distance = dist[node] + weight_func(weight[0], weight[1])
